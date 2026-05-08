@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="Scarlet's Basement Proxy Logo" width="200">
+  <img src="https://github.com/KrisbelGV/scarlets_basement-website/blob/main/assets/logo.png" alt="Scarlet's Basement Proxy Logo" width="200">
 </p>
 
 <p align="center">
