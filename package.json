@@ -1,0 +1,15 @@
+{
+  "name": "scarlets_basement-proxy",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node api/index.js",
+    "start": "node api/index.js"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.37.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "http-errors": "^2.0.0"
+  }
+}
