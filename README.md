@@ -40,7 +40,6 @@ Created by [KrisbelGV](https://github.com/KrisbelGV) as part of the educational 
   - [Responsibilities by layer](#responsibilities-by-layer)
 - [Design notes](#design-notes)
 - [Endpoints](#endpoints)
-- [Transparency](#transparency)
 - [License](#license)
 - [How to contribute?](#how-to-contribute)
 
@@ -126,17 +125,30 @@ scarlets-basement-proxy/
 | Utilities | src/utils/createAbortController.js | Timeout for long operations |
 
 ## Design notes
-The implementation of a browser-based filtering service using a third-party proxy to bypass CORS was analyzed but ultimately discarded due to privacy concerns and the need to control information flow. However, we remain open to collaborating with external providers to improve the user experience, reduce the workload on the Scratch API, and develop new features beyond the initial five primary functions.
 
-Similarly, we thoroughly explored developing a request queuing system, considering current requirements and system limitations (no concurrent requests), which had reached a considerable point. However, its implementation was abandoned due to an unacceptable error rate caused by minor network latency and inter-service communication issues, which negatively impacted the user experience and unnecessarily consumed resources.
+Key technical decisions—and why certain approaches were rejected.
 
-We also considered adding a mirrored endpoint or other functionality to the existing ones, which would allow pagination to resume where the processing time limit had triggered it. However, similar to the previous proposals, it was rejected in order to preserve resources for diverse and non-exhaustive inquiries, considering the current scope more than sufficient. Despite this, it could be reconsidered at the request of users if they find it useful.
+### ❌ Client-side filtering (discarded)
+Using a third-party proxy to bypass CORS and filter on the browser was rejected due to **privacy concerns**. A browser-based solution would expose user requests and filtering patterns to external servers, whereas a server-side proxy keeps all processing under the project's control.
+
+### ❌ Request queue system (discarded)
+A queuing mechanism was prototyped to handle concurrent requests, but it produced an **unacceptable error rate** due to network latency and inter-service communication issues. It degraded user experience and consumed unnecessary resources, so it was removed.
+
+### ❌ Resumable pagination (discarded)
+The idea of adding mirrored endpoints to resume pagination after timeout limits was considered but **rejected to preserve resources** for diverse, non-exhaustive queries. The current five endpoints are sufficient, though this could be reconsidered based on user feedback.
+
+### ✅ Current approach
+The proxy focuses on **lightweight, stateless filtering** with rate limiting and a circuit breaker to protect the Scratch API. All decisions prioritize reliability, privacy, and fair access for all users.
+
+> 💡 **Open to collaboration** – We remain open to working with external providers to reduce Scratch API load and develop new features, provided privacy standards are met.
 
 ## Endpoints
 
-For testing from the console, browser, and various tools. It is not accessible from sites not belonging to my GitHub account, [KrisbelGV](https://github.com/KrisbelGV), nor is its use intended through any means other than the dedicated static web client. However, you are free to use your daily API requests as you prefer, as long as this does not interfere with the natural and timely access of other users.
+All endpoints return a boolean `abort` field:
+- `false` — Complete result from Scratch API
+- `true` — Incomplete result (processing timeout or partial data)
 
-> **Note:** All endpoints return a boolean `abort` field indicating whether the result is incomplete (`true`) or the official complete result (`false`).
+> **Access policy:** This API implements CORS restrictions and is only accessible from domains associated with [KrisbelGV's GitHub repositories](https://github.com/KrisbelGV) and the official [Scarlet's Basement Website](https://krisbelgv.github.io/scarlet-basement-website/). You may test the API for educational or development purposes (console, browser, curl, Postman, etc.), but use in external projects is not open for discussion. Resources are limited and must be reserved to guarantee the proper functioning of this service.
 
 ### `GET /api/userdata/:username`
 Returns a summary of statistics for a given user.
@@ -180,15 +192,19 @@ Returns a custom following feed for the given user.
 
 ## License
 
-This project is licensed under the MIT License without warranty or liability for its misuse. A copy is available in this repository, and further information, along with the original, can be found on its website.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](./LICENSE) file in this repository for the full terms.
 
 ## How to contribute?
-As an open-source educational project, we are more than happy to receive contributions/corrections.
+
+Contributions to the codebase are welcome! As an open-source educational project, we appreciate improvements, bug fixes, and documentation enhancements.
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feat/feature`)
 3. Commit your changes (`git commit -m 'Add feature'`)
 4. Push to the branch (`git push origin feat/feature`)
 5. Open a Pull Request
+6. **After your PR is reviewed and merged by the maintainer, it will be automatically deployed**
 
-For more detailed tracking of bug fixes or updates and the motivations behind them, we recommend following our news thread in the Scratch discussion forum.
+> **Note for contributors:** Deployments are handled via GitHub Actions. All changes must go through a Pull Request. Direct pushes to `main` are protected and will be rejected.
+
+For detailed tracking of bug fixes or updates, follow our news thread in the Scratch discussion forum.
