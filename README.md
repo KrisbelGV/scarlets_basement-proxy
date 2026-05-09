@@ -12,7 +12,7 @@
 
 Scratch public API proxy server (MIT). Provides extended user information and additional filters on basic functions, such as searching for projects and studios, plus exclusive indexing queries and a custom feed from your qualified followers.
 
-Created by [KrisbelGV](https://github.com/KrisbelGV) as part of the educational and learning project ["Scarlet's Basement"](https://krisbelgv.github.io/scarlet-basement-website/) available on the [Scarlet's Basement Website](https://krisbelgv.github.io/scarlet-basement-website/about.html).
+Created by [KrisbelGV](https://github.com/KrisbelGV) as part of the educational and learning project ["Scarlet's Basement"](https://krisbelgv.github.io/scarlet-basement-website/about.html) available on the [Scarlet's Basement Website](https://krisbelgv.github.io/scarlet-basement-website/).
 
 ## Features
 - 🔍 **Extended search** - Search projects and studios with additional filters (mode, profiles, discard terms)
