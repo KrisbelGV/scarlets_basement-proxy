@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/deploy-Vercel-black" alt="Deploy Vercel">
 </p>
 
-# Scarlet's Basement Proxy
+# Scarlet's Basement — Proxy
 
 Scratch public API proxy server (MIT). Provides extended user information and additional filters on basic functions, such as searching for projects and studios, plus exclusive indexing queries and a custom feed from your qualified followers.
 
