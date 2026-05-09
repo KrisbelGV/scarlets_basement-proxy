@@ -12,7 +12,7 @@
 
 Scratch public API proxy server (MIT). Provides extended user information and additional filters on basic functions, such as searching for projects and studios, plus exclusive indexing queries and a custom feed from your qualified followers.
 
-Created by [KrisbelGV](https://github.com/KrisbelGV) as part of the educational and learning project ["Scarlet's Basement"](https://krisbelgv.github.io/scarlet-basement-website/about.html) available on the [Scarlet's Basement Website](https://krisbelgv.github.io/scarlet-basement-website/).
+Created by [KrisbelGV](https://github.com/KrisbelGV) as part of the educational and learning project ["Scarlet's Basement"](https://krisbelgv.github.io/scarlets_basement-website/pages/about.html) available on the [Scarlet's Basement Website](https://krisbelgv.github.io/scarlets_basement-website/).
 
 ## Features
 - 🔍 **Extended search** - Search projects and studios with additional filters (mode, profiles, discard terms)
@@ -154,7 +154,7 @@ All endpoints return a boolean `abort` field:
 - `false` — Complete result from Scratch API
 - `true` — Incomplete result (processing timeout or partial data)
 
-> **Access policy:** This API implements CORS restrictions and is only accessible from domains associated with [KrisbelGV's GitHub repositories](https://github.com/KrisbelGV) and the official [Scarlet's Basement Website](https://krisbelgv.github.io/scarlet-basement-website/). You may test the API for educational or development purposes (console, browser, curl, Postman, etc.), but use in external projects is not open for discussion. Resources are limited and must be reserved to guarantee the proper functioning of this service.
+> **Access policy:** This API implements CORS restrictions and is only accessible from domains associated with [KrisbelGV's GitHub repositories](https://github.com/KrisbelGV) and the official [Scarlet's Basement Website](https://krisbelgv.github.io/scarlets_basement-website/). You may test the API for educational or development purposes (console, browser, curl, Postman, etc.), but use in external projects is not open for discussion. Resources are limited and must be reserved to guarantee the proper functioning of this service.
 
 ### `GET /api/userdata/:username`
 Returns a summary of statistics for a given user.
