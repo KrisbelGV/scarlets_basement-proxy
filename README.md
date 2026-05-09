@@ -51,20 +51,26 @@ Created by [KrisbelGV](https://github.com/KrisbelGV) as part of the educational 
     cd scarlets_basement-proxy
     ```
 
-2. Install the project dependencies
+2. Ensure you have Node.js 18 or higher
+
+    ```bash
+    node --version  # Should be v18.x or higher
+    ```
+  
+3. Install the project dependencies
 
     ```bash
     npm install
     ```
 
-3. Create a `.env` file in the project root
+4. Create a `.env` file in the project root
 
     ```env
     NODE_ENV=development
     PORT=300
     ```
 
-4. Run the development server
+5. Run the development server
 
     ```bash
     npm run dev
