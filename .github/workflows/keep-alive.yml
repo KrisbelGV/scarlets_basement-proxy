@@ -1,0 +1,15 @@
+name: Keep Vercel token active
+
+on:
+  schedule:
+    - cron: '0 0 * * MON'
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Use Vercel token
+      shell: bash
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      run: npx vercel --token "$VERCEL_TOKEN" whoami
