@@ -10,11 +10,7 @@ const cors = require('cors');
 const errorHandler = require('../src/middleware/errorHandler');
 const proxy = require('../src/routes/proxy');
 
-const ALLOWED_ORIGINS = [
-  'https://krisbelgv.github.io',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
-];
+const ALLOWED_ORIGIN = 'https://krisbelgv.github.io';
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -24,7 +20,7 @@ app.use(cors({
       return callback(null, true);
     }
     
-    if (ALLOWED_ORIGINS.includes(origin)) {
+    if (origin === ALLOWED_ORIGIN) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
