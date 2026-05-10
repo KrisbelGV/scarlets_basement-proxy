@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const createAbortController = require('../utils/createAbortController');
+const { clearScratchFailure } = require('../utils/upstash');
 const {
   getProjectDataFromId,
   searchProjectsGeneralFromId
@@ -22,6 +23,10 @@ exports.getProjectDataFromIndex = catchAsync(async function getProjectDataFromIn
     {results:projectData, message:"No index"}
     : {results:found, message:"Index"};
 
+  if (res.locals.scratchWasDown) {
+    await clearScratchFailure().catch(() => {});
+  }
+  
   return res.status(200).json({
     ...found,
     aborted: signal.aborted

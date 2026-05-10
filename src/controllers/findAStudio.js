@@ -1,6 +1,7 @@
 const {InputError} = require('../middleware/validator');
 const catchAsync = require('../utils/catchAsync');
 const createAbortController = require('../utils/createAbortController');
+const { clearScratchFailure } = require('../utils/upstash');
 const {
   getProjectDataFromId,
   getTagsFromProject,
@@ -22,6 +23,10 @@ exports.getStudioForAProject = catchAsync(async function getStudioForAProject(re
     {results: 'No search results'}
     : {results: studiosFound};
 
+  if (res.locals.scratchWasDown) {
+    await clearScratchFailure().catch(() => {});
+  }
+  
   return res.status(200).json({
     ...studiosFound,
     aborted: signal.aborted

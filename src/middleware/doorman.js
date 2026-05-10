@@ -93,6 +93,8 @@ exports.dailyRateGuard = catchAsync(async function dailyRateGuard(req, res, next
     err.status = 502;
     throw err;
   }
+
+  res.locals.scratchWasDown = scratchStatus.status === 'retry_allowed';
   
   const rateLimit = await checkDailyRateLimit(ip);
   
