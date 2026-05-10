@@ -1,8 +1,5 @@
 const createError = require('http-errors');
-const { 
-  registerScratchFailure,
-  clearScratchFailure
-} = require('../utils/upstash');
+const { registerScratchFailure } = require('../utils/upstash');
 
 class ExternalApiError extends Error {
   constructor(status, message) {
@@ -56,9 +53,6 @@ const requestExternalData = async (url) => {
 const protectedRequest = async (url) => {
   try {
     const result = await requestExternalData(url);
-    
-    await clearScratchFailure().catch(() => {});
-    
     return result;
   } catch (error) {
     if (error.status >= 500 || error.status === 429) {

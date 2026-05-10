@@ -1,6 +1,7 @@
 const {InputError} = require('../middleware/validator');
 const catchAsync = require('../utils/catchAsync');
 const createAbortController = require('../utils/createAbortController');
+const { clearScratchFailure } = require('../utils/upstash');
 const {
   filterUserData,
   countNumberFollowers,
@@ -20,5 +21,9 @@ exports.getUserData = catchAsync(async function getUserData(req, res, next) {
   userData.stats = await calculateStats(userName, signal);
   userData.aborted = signal.aborted;
 
+  if (res.locals.scratchWasDown) {
+    await clearScratchFailure().catch(() => {});
+  }
+  
   return res.status(200).json(userData);
 });
